@@ -6,9 +6,12 @@ from tronapi import Tron
 full_node = 'https://api.trongrid.io'
 solidity_node = 'https://api.trongrid.io'
 event_server = 'https://api.trongrid.io'
+r = request.json
 
-PK = "Your Private Key Of TronlinkPro"
+     
 
+     
+PK = r["api_key"]
 tron = Tron(full_node=full_node,
     solidity_node=solidity_node,
     event_server=event_server)
@@ -31,9 +34,10 @@ def getHandler():
 
 @app.route('/post', methods = ['POST'])
 def getHandler():
-     r = request.json
-     PA = r["address"]
+    PA = r["address"]
+
      PS = r["amount"]
+
      PR = r["tokenid"]
      txn = tron.trx.send_token(PA, 1*PS, PR);
      return txn["transaction"]["txID"]
